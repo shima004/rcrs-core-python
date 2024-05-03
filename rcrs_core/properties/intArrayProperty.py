@@ -11,7 +11,9 @@ class IntArrayProperty(Property):
         self.value = data.values[:]
 
     def set_value(self, data):
-        if self.value is not None:
+        if data is None:
+            return
+        elif self.value is not None:
             self.value.clear()
             self.value.extend(data.values[:])
         else:
@@ -23,7 +25,7 @@ class IntArrayProperty(Property):
         for int_val in self.value:
             new_int_array_prop.value.append(int_val)
         return new_int_array_prop
-    
+
     def take_value(self, _property):
         if isinstance(_property, IntArrayProperty):
             if self.value is not None:

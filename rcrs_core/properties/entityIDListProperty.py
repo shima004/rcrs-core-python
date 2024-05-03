@@ -1,6 +1,7 @@
+from typing import List
+
 from rcrs_core.properties.property import Property
 from rcrs_core.worldmodel.entityID import EntityID
-from typing import List
 
 
 class EntityIDListProperty(Property):
@@ -15,7 +16,9 @@ class EntityIDListProperty(Property):
         self.value = _values
 
     def set_value(self, _value: List[EntityID]):
-        if self.value is not None:
+        if _value is None:
+            pass
+        elif self.value is not None:
             self.value.clear()
             self.value.extend(_value)
         else:
@@ -25,8 +28,7 @@ class EntityIDListProperty(Property):
         new_entity_id_list_prop = EntityIDListProperty(self.urn)
         new_entity_id_list_prop.value = []
         for entity_id in self.value:
-            new_entity_id_list_prop.value.append(
-                EntityID(entity_id.get_value()))
+            new_entity_id_list_prop.value.append(EntityID(entity_id.get_value()))
         return new_entity_id_list_prop
 
     def take_value(self, _property):
