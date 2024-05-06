@@ -20,9 +20,9 @@ class EntityIDListProperty(Property):
             pass
         elif self.value is not None:
             self.value.clear()
-            self.value.extend(_value)
+            self.value.extend(_value.values[:])
         else:
-            self.value = _value
+            self.value = _value[:]
 
     def copy(self):
         new_entity_id_list_prop = EntityIDListProperty(self.urn)
